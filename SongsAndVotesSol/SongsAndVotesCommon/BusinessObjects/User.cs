@@ -1,28 +1,44 @@
 ﻿using System;
 using System.Collections.Generic;
 
-
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SongsAndVotesCommon.BusinessObjects
 {
-
+    [Table("UserData")]
     /// <summary>
     /// Represents a user in the SongsAndVotes app.
     /// </summary>
     public class User
     {
-
-        /// <summary>Username for this user.</summary>
+        [Column("Username")]
         public string Username { get; set; }
 
-        /// <summary>The user's password.</summary>
+        [Column("Password")]
         public string Password { internal get; set; }
 
-        public User(string username, string password)
+        [Key]
+        [Column("ID")]
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]
+        public int ID { get; set; }
+
+        [Column("Role")]
+        public string Role { get; set; }
+
+        public User(string username, string password, int ID, string Role)
         {
             this.Username = username;
             this.Password = password;
+            this.ID = ID;
+            this.Role = Role;
         }
+
+        [NotMapped]
+        public UserProfile UserProfile { get; set; }
+
+
+
 
         public override string ToString()
         {

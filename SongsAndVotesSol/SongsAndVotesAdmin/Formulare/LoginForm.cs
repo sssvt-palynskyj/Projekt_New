@@ -42,7 +42,8 @@ namespace SongsAndVotesAdmin.Formulare
             }
             else
             {
-                this.Close();
+                this.Hide();
+                //this.Close();
                 ErrorForm errorForm = new ErrorForm();
                 errorForm.Show();
             }

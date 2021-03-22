@@ -31,7 +31,7 @@ namespace SongsAndVotesCommon.Repos
 
 
         //-------------------------------------------------------------------------------------------
-        private const string connectionString = "Server=localhost; Database=SongsAndVotesUsers; Integrated Security=true";
+        public const string connectionString = "Server=localhost; Database=SongsAndVotesUsers; Integrated Security=true";
         public SqlConnection ConnectToDatabase()
         {
             SqlConnection connection = new SqlConnection(connectionString);

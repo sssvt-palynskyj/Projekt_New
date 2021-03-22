@@ -20,5 +20,11 @@ namespace SongsAndVotesAdmin.Formulare
         private void MainForm_Load(object sender, EventArgs e)
         {
         }
+
+        private void MainForm_Shown(object sender, EventArgs e)
+        {
+            LoginForm loginForm = new LoginForm(false);
+            loginForm.ShowDialog(this);
+        }
     }
 }

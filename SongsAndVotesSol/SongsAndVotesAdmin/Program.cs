@@ -16,7 +16,7 @@ namespace SongsAndVotesAdmin
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Formulare.LoginForm(false));
+            Application.Run(new Formulare.LoginForm(false)); //předat main form
         }
     }
 }
