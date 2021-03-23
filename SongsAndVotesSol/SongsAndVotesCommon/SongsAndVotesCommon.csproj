@@ -54,6 +54,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BusinessObjects\Role.cs" />
     <Compile Include="BusinessObjects\User.cs" />
     <Compile Include="BusinessObjects\UserProfile.cs" />
     <Compile Include="Cryptography\AesEncryption.cs" />

@@ -67,6 +67,7 @@ namespace SongsAndVotesCommon.Repos
                 {
                     i++;
                     User MatchingUser = new User(sqlDataReader.GetString(i), null);
+                    User user = new User()
                     MatchingUserName.Add(MatchingUser);
                 }
                 return MatchingUserName;
