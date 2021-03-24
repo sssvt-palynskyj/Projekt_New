@@ -23,6 +23,7 @@ namespace SongsAndVotesAdmin.Formulare
 
         private void MainForm_Shown(object sender, EventArgs e)
         {
+            this.Hide();
             LoginForm loginForm = new LoginForm(false);
             loginForm.ShowDialog(this);
         }

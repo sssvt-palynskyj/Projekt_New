@@ -12,33 +12,19 @@ using System.Data.SqlClient;
 
 namespace SongsAndVotesCommon.Repos
 {
-    class UserRepoMssql : IUserRepo
+    public class UserRepoMssql : IUserRepo
     {
-
-
-        public void Add(User user)
-        {
-            throw new NotImplementedException();
-        }
+        MssqlContext mssqlContext = new MssqlContext();
 
         public SqlConnection ConnectToDatabase()
         {
-            throw new NotImplementedException();
-        }
-
-        public bool Exists(User user)
-        {
-            throw new NotImplementedException();
-        }
-
-        public IList<User> FindList(User user)
-        {
-            throw new NotImplementedException();
+            SqlConnection connection = new SqlConnection(UserRepo.connectionString);
+            return connection;
         }
 
         public IList<User> GetList()
         {
-            using ( var context = new MssqlContext())
+            using (var context = new MssqlContext())
             {
                 var querry = from f in context.Users
                              select f;
@@ -48,13 +34,51 @@ namespace SongsAndVotesCommon.Repos
             }
         }
 
-        public User Load(User user)
+        public void Add(User user)
         {
-            throw new NotImplementedException();
+            mssqlContext.Users.Add(user); //prida do "underlying context"
+            mssqlContext.Users.Attach(user); //nic nezapíše do databáze ale prida do "underlying context"
+            mssqlContext.Entry(user).State = EntityState.Added; // umozni za/pre pisovat ???
+            mssqlContext.SaveChanges(); // z "underlying context" ulozi do databaze
         }
 
         public void Remove(User user)
         {
+            mssqlContext.Users.Remove(user); //oznaci jako deleted, musi se attachnout pred .savechanges
+            //mssqlContext.Users.Attach(user); 
+            mssqlContext.Entry(user).State = EntityState.Deleted;
+            mssqlContext.SaveChanges();
+        }
+
+        public bool Exists(User user)
+        {
+            if(mssqlContext.Users.Find(user) == null)
+//System.InvalidOperationException: No connection string named 'SongsAndVotesCommon.Properties.Settings.SongsAndVotesUsersConnectionString' could be found in the application config file.
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
+
+        public IList<User> FindList(User user)
+        {
+            using (var context = new MssqlContext())
+            {
+                var querry = from f in context.Users
+                             where Exists(user) == true
+                             select f;
+                var users = querry.ToList<User>();
+
+                return users;
+            }
+        }
+
+        public User Load(User user)
+        {
+            //mssqlContext.Users.Load();
             throw new NotImplementedException();
         }
 

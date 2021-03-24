@@ -15,24 +15,34 @@ namespace SongsAndVotesCommon.BusinessObjects
         [Column("Username")]
         public string Username { get; set; }
 
-        [Column("Password")]
+        [Column("UserPassword")]
         public string Password { internal get; set; }
 
         [Key]
         [Column("ID")]
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
+        //[DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int ID { get; set; }
 
-        [Column("Role")]
-        public string Role { get; set; }
+        [Column("CisloRole")]
+        public string CisloRole { get; set; }
 
-        public User(string username, string password, int ID, string Role)
+        public User(string username, string password, int ID, string cisloRole)
         {
             this.Username = username;
             this.Password = password;
             this.ID = ID;
-            this.Role = Role;
+            this.CisloRole = cisloRole;
         }
+        public User(string username, string password)
+        {
+            this.Username = username;
+            this.Password = password;
+        }
+        public User(string username)
+        {
+            this.Username = username;
+        }
+
 
         [NotMapped]
         public UserProfile UserProfile { get; set; }

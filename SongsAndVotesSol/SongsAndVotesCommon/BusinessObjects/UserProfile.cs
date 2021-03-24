@@ -14,7 +14,7 @@ namespace SongsAndVotesCommon.BusinessObjects
     {
         [Key]
         [Column("ID")]
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
+        //[DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int ID { get; set; }
 
         [Column("NAME")]
@@ -23,8 +23,8 @@ namespace SongsAndVotesCommon.BusinessObjects
         [Column("DESCRIPTION")]
         public string Description { get; set; }
 
-        [Column("JOINED_IN")]
-        public int? JoinedIn { get; set; }
+        [Column("PK_USERPROFILE")]
+        public int? Pk_UserProfile { get; set; }
 
         public IList<Playlist> Playlists { get; set; }
     }

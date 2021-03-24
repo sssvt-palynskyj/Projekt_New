@@ -15,6 +15,7 @@ namespace SongsAndVotesCommon.EF
         public DbSet<User> Users { get; set; }
         public DbSet<UserProfile> UserProfiles { get; set; }
         public DbSet<Playlist> Playlists { get; set; }
+        public DbSet<Role> Roles { get; set; }
 
         public MssqlContext() :  base("name=SongsAndVotesCommon.Properties.Settings.SongsAndVotesUsersConnectionString")
         {

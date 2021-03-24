@@ -9,12 +9,14 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 
 using SongsAndVotesCommon.Interfaces;
+using SongsAndVotesCommon.Repos;
 
 namespace SongsAndVotesAdmin.Formulare
 {
     public partial class LoginForm : Form
     {
         SongsAndVotesCommon.Repos.UserRepo userRepo = new SongsAndVotesCommon.Repos.UserRepo();
+        UserRepoMssql userRepoMssql = new UserRepoMssql();
 
         public LoginForm(bool b)
         {
@@ -35,7 +37,17 @@ namespace SongsAndVotesAdmin.Formulare
         {
             SongsAndVotesCommon.BusinessObjects.User user = new 
                 SongsAndVotesCommon.BusinessObjects.User(Convert.ToString(textBoxUsername), Convert.ToString(textBoxPassword));
-            if(userRepo.Exists(user) == true)
+            if(userRepoMssql.Exists(user) == true)
+            {
+                this.Close();
+            }
+            else
+            {
+                this.Close();
+                ErrorForm errorForm = new ErrorForm();
+                errorForm.ShowDialog();
+            }
+            /*if(userRepo.Exists(user) == true)
             {
                 MainForm mainForm = new MainForm();
                 mainForm.Show();
@@ -45,8 +57,8 @@ namespace SongsAndVotesAdmin.Formulare
                 this.Hide();
                 //this.Close();
                 ErrorForm errorForm = new ErrorForm();
-                errorForm.Show();
-            }
+                errorForm.ShowDialog();
+            }*/
         }
     }
 }
